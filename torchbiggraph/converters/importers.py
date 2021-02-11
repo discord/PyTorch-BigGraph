@@ -257,10 +257,13 @@ def generate_edge_path_files(
                 skipped += 1
                 continue
 
-            if (lhs_part, rhs_part) not in appenders:
-                appenders[lhs_part, rhs_part] = appender_stack.enter_context(
-                    edge_storage.save_edges_by_appending(lhs_part, rhs_part)
-                )
+            # if (lhs_part, rhs_part) not in appenders:
+            #     appenders[lhs_part, rhs_part] = appender_stack.enter_context(
+            #         edge_storage.save_edges_by_appending(lhs_part, rhs_part)
+            #     )
+            appenders[lhs_part, rhs_part] = appender_stack.enter_context(
+                edge_storage.save_edges_by_appending(lhs_part, rhs_part)
+            )
             appenders[lhs_part, rhs_part].append_edges(
                 EdgeList(
                     EntityList.from_tensor(
