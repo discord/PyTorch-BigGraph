@@ -154,7 +154,8 @@ OPTIMIZER_STATE_DICT_DATASET = "optimizer/state_dict"
 
 
 def save_embeddings(hf: h5py.File, embeddings: FloatTensorType) -> None:
-    hf.create_dataset(EMBEDDING_DATASET, data=embeddings.numpy())
+    data = embeddings.numpy()
+    hf.create_dataset(EMBEDDING_DATASET, data=data, chunks=True, maxshape=(None, data.shape[1]))
 
 
 def load_embeddings(
